@@ -1,0 +1,7 @@
+id,name,email,age,active
+101,Omer,omer@example.com,28,True
+102,Ali,ali@example.com,25,False
+103,,ahmed@example.com,30,True
+104,Ahmed,invalid-email,32,True
+105,Usman,usman@example.com,17,True
+106,Hamza,hamza@example.com,29,yes
