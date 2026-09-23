@@ -1,25 +1,26 @@
 import csv
 import pytest
+
 from validator import validate_user
+
 
 with open("data/users.csv", "r") as file:
     data = csv.DictReader(file)
     users = list(data)
 
-    
 
 for user in users:
-    user["id"] = int(user["id"]) # converts string to integer
-    user["age"] = int(user["age"]) # converts string to integer
+    user["id"] = int(user["id"])
+    user["age"] = int(user["age"])
 
-    if user["active"] == "True":  # converts string to boolean
+    if user["active"] == "True":
         user["active"] = True
     elif user["active"] == "False":
         user["active"] = False
-    print(user)
 
 
-expected = [True, True, False, False, False, False]
+expected_results = [True, True, False, False, False, False]
+
 expected_errors = {
     101: [],
     102: [],
@@ -29,12 +30,14 @@ expected_errors = {
     106: ["Invalid Active"]
 }
 
+
 @pytest.mark.regression
-@pytest.mark.parametrize("user, expected", list(zip(users, expected)))
+@pytest.mark.parametrize(
+    "user, expected",
+    list(zip(users, expected_results))
+)
 def test_csv_user(user, expected):
     result = validate_user(user)
-    print(result)
+
     assert result["valid"] == expected
-    assert result["errors"]== expected_errors[user["id"]]
-
-
+    assert result["errors"] == expected_errors[user["id"]]

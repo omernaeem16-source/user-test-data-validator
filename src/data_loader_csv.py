@@ -1,14 +1,18 @@
 import csv
 
+
 with open("data/users.csv", "r") as file:
     data = csv.DictReader(file)
+    users = list(data)
 
-    users=list(data)
-    print(users)
 
 for user in users:
-   user["id"] = int(user["id"])
-   user["age"] = int(user["age"])
-   user["active"] = user["active"] == "True"
+    user["id"] = int(user["id"])
+    user["age"] = int(user["age"])
+
+    if user["active"] == "True":
+        user["active"] = True
+    elif user["active"] == "False":
+        user["active"] = False
 
 print(users)

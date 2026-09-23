@@ -45,22 +45,21 @@ def validate_active(active):
         "errors": errors
     }
 
-def validate_id(id):
-    errors=[]
 
-    if not isinstance(id, int) or id <= 0 :
+def validate_id(user_id):
+    errors = []
+
+    if not isinstance(user_id, int) or user_id <= 0:
         errors.append("Invalid ID")
 
     return {
-          "valid": len(errors) == 0,
-          "errors": errors
-      }
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
 
 
 def validate_user(user):
-
-    errors=[]
-
+    errors = []
 
     name_result = validate_name(user["name"])
     errors.extend(name_result["errors"])
@@ -78,19 +77,6 @@ def validate_user(user):
     errors.extend(id_result["errors"])
 
     return {
-    "valid": len(errors) == 0,
-    "errors": errors
-}
-
-def edge_id_case():
-        user = {
-        "id": 0,
-        "name": "Omer",
-        "email": "omer@example.com",
-        "age": 28,
-        "active": True
+        "valid": len(errors) == 0,
+        "errors": errors
     }
-        Result= validate_id(user["id"])
-
-        assert Result["valid"]== False
-        assert Result["errors"]==["Invalid ID"]
